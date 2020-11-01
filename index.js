@@ -63,12 +63,25 @@ const questions = [
 
 
   //use switch stmt to make badge id
-function generateMarkdown(answer){
+let licenseBadge = "";
+    switch (answer.license){
+      case "Apache License 2.0":
+        licenseBadge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+        break;
+      case "GNU GPLv3":
+        licenseBadge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
+        break;
+      case "MIT License":
+        licenseBadge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+        break;
+
+    }
+
+
+function generateMarkdown(answer) { 
   return `# ${answer.title}
-        //need license badge
-  ![${answer.repo}](https://img.shields.io/github/languages/top/${answer.username}/${answer.repo})
-
-
+    //license badge
+    ${licenseBadge}
     ## Description 
     ${answer.description}
     ## Installation
@@ -85,17 +98,18 @@ function generateMarkdown(answer){
     ## Questions
     For any question, please contact me at:
     GitHub link: ${answer.username}
-    E-mail: ${answer.email}`; 
+    E-mail: ${answer.email}`;
+}
 
-};
-
-// function writeToFile(fileName, data) {
-// }
+function writeToFile(fileName, data) {
+  const markdown = generateMarkdown(answer);
+  return fs.writeFileSync(filename, markdown)
+}
 
 // // function to initialize program
 function init() {
-  inquirer.prompt(questions).then((answer) => 
-    writetoFile("sampleREADME.md", generateMarkdown(answer), (err) => {
+  inquirer.prompt(questions).then(answer => 
+    writeToFile("sampleREADME.md", answer, (err) => {
       if (err) {
         return console.log(err);
       }
