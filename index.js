@@ -94,17 +94,13 @@ function generateMarkdown(answer){
 
 // // function to initialize program
 function init() {
-  inquirer
-  .prompt(questions).then(answer =>{
-    fs.writeFile("sampleREADME.md", generateMarkdown, (err) => {
+  inquirer.prompt(questions).then((answer) => 
+    writetoFile("sampleREADME.md", generateMarkdown(answer), (err) => {
       if (err) {
         return console.log(err);
       }
       console.log("Success!");
-    });
-
-  });
-}
-
-// // function call to initialize program
+    }));
+  };
+// function call to initialize program
 init();
