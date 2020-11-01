@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require('util');
+// const writeFileAsync = util.promisify(fs.writeFile);
 
 // array of questions for user
 
@@ -62,54 +63,59 @@ const questions = [
     ];
 
 
-  //use switch stmt to make badge id
-let licenseBadge = "";
-    switch (answer.license){
-      case "Apache License 2.0":
-        licenseBadge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
-        break;
-      case "GNU GPLv3":
-        licenseBadge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
-        break;
-      case "MIT License":
-        licenseBadge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
-        break;
-
-    }
-
-
 function generateMarkdown(answer) { 
-  return `# ${answer.title}
-    //license badge
-    ${licenseBadge}
-    ## Description 
-    ${answer.description}
-    ## Installation
-    ${answer.installation}
-    ## Usage
-    ${answer.usage}
-    ##License
-    This license is covered under:
-    *[License]${answer.license}
-    ## Contributing
-    ${answer.contributing}
-    ## Test
-    ${answer.test}
-    ## Questions
-    For any question, please contact me at:
-    GitHub link: ${answer.username}
-    E-mail: ${answer.email}`;
-}
+// use switch stmt to make badge id
 
-function writeToFile(fileName, data) {
-  const markdown = generateMarkdown(answer);
-  return fs.writeFileSync(filename, markdown)
+// let licenseBadge = "";
+//     switch (answer.license){
+//       case "Apache License 2.0":
+//         licenseBadge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+//         break;
+//       case "GNU GPLv3":
+//         licenseBadge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
+//         break;
+//       case "MIT License":
+//         licenseBadge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+//         break;
+//     }
+
+  let draftMarkdown = 
+  `# ${answer.title}
+    license badge
+
+  ## Description 
+    ${answer.description}
+  ## Table of Contents
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [License](#license)
+  * [Contributing](#contributing)
+  * [Test](#test)
+  * [Questions](#questions)
+  
+  ## Installation
+    ${answer.installation}
+  ## Usage
+    ${answer.usage}
+  ##License
+    This license is covered under:
+  *[License]${answer.license}
+  ## Contributing
+    ${answer.contributing}
+  ## Test
+    ${answer.test}
+  ## Questions
+  For any question, please contact me at:
+  * GitHub link: ${answer.username}
+  * E-mail: ${answer.email}`;
+
+return draftMarkdown; 
 }
 
 // // function to initialize program
 function init() {
-  inquirer.prompt(questions).then(answer => 
-    writeToFile("sampleREADME.md", answer, (err) => {
+  inquirer.prompt(questions).then((answer) => 
+    fs.writeFile("sampleREADME.md", generateMarkdown(answer), (err) => {
       if (err) {
         return console.log(err);
       }
