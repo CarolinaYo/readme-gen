@@ -12,6 +12,12 @@ const questions = [
   },
   {
     type: "input",
+    name: "repo",
+    message: "Enter the name of your GitHub repository",
+    default: "readme-gen",
+  },
+  {
+    type: "input",
     name: "email",
     message: "Please enter your e-mail address.",
   },
@@ -40,7 +46,7 @@ const questions = [
   {
     type: "input",
     name: "contributing",
-    message: "Please provide guidline for others to contribute.",
+    message: "Please provide guideline for others to contribute.",
   },
   {
     type: "input",
@@ -71,13 +77,14 @@ function generateMarkdown(answer) {
   }
 // Drafting the README file
   let draftMarkdown = `# ${answer.title}
-  *`;
+  `;
   //adding badge
   draftMarkdown += licenseBadge;
 
   draftMarkdown += `
   ## Description 
     ${answer.description}
+
   ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
@@ -88,18 +95,24 @@ function generateMarkdown(answer) {
   
   ## Installation
     ${answer.installation}
+
   ## Usage
     ${answer.usage}
-  ##License
+
+  ## License
   This license is covered under:
-  * [License]${answer.license}
+  * ${answer.license}
+
   ## Contributing
     ${answer.contributing}
+
   ## Test
     ${answer.test}
+
   ## Questions
   For any question, please contact me at:
-  * GitHub link: ${answer.username}
+  * GitHub account: https://github.com/${answer.username}
+  * GitHub repository: https://github.com/${answer.username}/${answer.repo}.git
   * E-mail: ${answer.email}`;
 
   return draftMarkdown;
