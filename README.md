@@ -16,7 +16,7 @@ In the terminal mode, user must first run __npm install__ to have its package de
 * User is presented with a series of questions. 
 * ![sample questions](./assets/sampleQnA.PNG)
 * Then a sampleREADME.md file is generated with the following preview:
-* ![sampleREADME.md preview](assets\sampleREADME.PNG)
+* ![sampleREADME.md preview](./assets/sampleREADME.PNG)
 
 
 ## License
