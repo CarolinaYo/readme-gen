@@ -11,8 +11,9 @@ In the terminal mode, user must first run __npm install__ to have its package de
 ## Usage 
 ### Demo of README generator:
 ![demo](./assets/demo.gif)
+* Link to preview demo: https://drive.google.com/file/d/1YCM5FXpCp6cVJKbCBF6lfXlzw6hiWgsZ/view
 
-### Steps
+### Still images preview:
 * User is presented with a series of questions. 
 * ![sample questions](./assets/sampleQnA.PNG)
 * Then a sampleREADME.md file is generated with the following preview:
